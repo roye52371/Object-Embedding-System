@@ -1,105 +1,118 @@
 <div align="center">
 
-# Object Embedding System
+# **Object Embedding System**
 
 </div>
 
-## Overview
-This project implements an object embedding system that detects objects in an image, extracts their bounding boxes, and generates embeddings for each detected object. The embeddings allow clustering, retrieval, and comparison of similar objects.
+## **Overview**
+This project implements an **Object Embedding System** that detects objects in an image, extracts their bounding boxes, and generates embeddings for each detected object. The embeddings allow **clustering, retrieval, and comparison of similar objects**.
 
-## Features
-- **Object Detection**: Uses YOLOv12x to detect objects in an image.
+## **Features**
+- **Object Detection**: Uses **YOLOv12x** to detect objects in an image.
 - **Object Embedding Extraction**:
-  - **Cropping with ResNet50 (Main Algorithm)**: Crops detected objects and extracts embeddings using a ResNet50 backbone.
-  - **CLIP Encoder (Alternative Option)**: Can be used instead of ResNet50 for embedding extraction.
-  - **ROI Align Approach (Tested but Not Effective)**: Implemented but found to produce lower-quality embeddings.
+  - **Cropping with ResNet50 (Main Algorithm)** – Extracts high-quality embeddings.
+  - **CLIP Encoder (Alternative Option)** – Can be used instead of ResNet50 for embeddings.
+  - **ROI Align (Tested but Not Effective)** – Implemented but found to produce lower-quality embeddings.
 - **Visualization**:
-  - **t-SNE (2D)**: Projects embeddings into a 2D space for visualization.
-  - **PCA (3D)**: Projects embeddings into a 3D space for better class separation.
+  - **t-SNE (2D)** – Projects embeddings into 2D space for better **local structure evaluation**.
+  - **PCA (3D)** – Projects embeddings into 3D space for **global structure analysis**.
 
-## 📁 Project Structure
-- `Dogs_and_cats_folder`: The dataset used for evaluate the object embedding system.
-- `ObjectEmbedding.ipynb`: The main notebook containing the implementation.
-- `requirements.txt`: The list of dependencies.
-- `README.md`: This documentation file.
+---
 
-## Setup Instructions
+## **📁 Project Structure**
+```
+├── cat_dogs_images/           # Sample images for object embedding evaluation
+├── ObjectEmbedding.ipynb      # Main implementation & evaluation notebook
+├── requirements.txt           # Python dependencies for this project
+├── README.md                  # Project documentation
+└── results/                   # Contains visualization outputs
+```
 
-### Requirements
-The project was tested on Google Colab using a **T4 GPU**.
-It should work on any system with a CUDA-compatible GPU.
-Make sure you have Python 3.11.11+ installed.
+---
 
-### Installation
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/roye52371/Object-Embedding-System.git
-   cd object-embedding
-   ```
+## **🚀 Installation & Setup**
+The project was tested on **Google Colab with a T4 GPU** but should work on **any CUDA-compatible GPU**.
 
-2. If not working on Google Colab - install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
+### **1️⃣ Clone the Repository**
+```bash
+git clone https://github.com/roye52371/Object-Embedding-System.git
+cd Object-Embedding-System
+```
 
-## Usage
+### **2️⃣ Install Dependencies**
+#### **Using Pip**:
+```bash
+pip install -r requirements.txt
+```
 
-### Running the Object Embedder
-The embedder can be initialized and tested as follows:
+💡 **Google Colab users** can skip installation, as dependencies will be installed automatically.
+
+---
+
+### **🔍 Evaluation Metrics**
+- **t-SNE (2D)** is used to evaluate local structure and how well embeddings of similar objects cluster.
+- **PCA (3D)** is used to analyze global structure and class separability.
+
+---
+
+## **🔬 Usage**
+### **Running the Object Embedder**
 ```python
 from object_embedder import ObjectEmbedder
 
 detector = "yolo12x"
-embed_method = "crop"  # Can be "roi_align" but is not recommended
+embed_method = "crop"  # Can be "roi_align" (not recommended)
 crop_backbone = "resnet50"  # Can be "clip" as an alternative
 conf_threshold = 0.6  # Confidence threshold for detection
 
-embedder = ObjectEmbedder(detection_model=detector, embed_method=embed_method, crop_backbone=crop_backbone, conf_threshold=conf_threshold, target_classes=["dog", "cat"])
+embedder = ObjectEmbedder(
+    detection_model=detector,
+    embed_method=embed_method,
+    crop_backbone=crop_backbone,
+    conf_threshold=conf_threshold,
+    target_classes=["dog", "cat"]
+)
+```
 
-# Evaluate on a folder of images
+### **Running Evaluation on a Folder of Images**
+```python
 evaluate_data("path/to/your/image/folder", embedder)
 ```
+For a **full pipeline demonstration**, open and run **`ObjectEmbedding.ipynb`**.
 
-In addition, the ObjectEmbedding.ipynb file contains the class and evaluation examples and can be run straightforwardly (with relevant data folder path).
+---
 
-### Evaluation Metrics
-- **t-SNE (2D)** is used to evaluate local structure and how well embeddings of similar objects cluster.
-- **PCA (3D)** is used to analyze global structure and class separability.
+## **📊 Expected Output**
+- ✅ **Bounding Boxes** – Objects detected with confidence scores.
+- ✅ **Feature Embeddings** – Each detected object is converted into a **numerical feature vector**.
+- ✅ **Visualizations**:
+  - **t-SNE 2D Plot** – Clusters objects (e.g., grouping dogs and cats).
+  - **PCA 3D Plot** – Shows **global class separation**.
 
-## **Expected Output**
-- **Bounding boxes**: The model detects objects and returns bounding boxes with confidence scores.
-- **Feature embeddings**: A numerical vector representing each detected object.
-- **Visualization**:
-  - **t-SNE 2D plot**: Clusters similar objects (e.g., all dogs together, all cats together).
-  - **PCA 3D plot**: Provides another view of class separation in a reduced space.
-
-## Example log output (from my crop+ResNet50 algorithm)
+### **Example Log Output (from my crop+ResNet50 algorithm)**:
 ```
-detector: yolo12x
-Embedding Method: crop
-Crop Backbone: resnet50
- Confidence Threshold: 0.6
-YOLOv12x summary (fused): 283 layers, 59,135,744 parameters, 0 gradients, 199.0 GFLOPs
 Processed 138 embeddings after filtering.
 Processed 35 images.
- Average processing time per image: 114.92 ms
+Average processing time per image: 114.92 ms
 ```
 
-## Expected Results (from my crop+ResNet50 algorithm)
+---
 
-Below are example outputs of the object embedding process:
-
-### t-SNE Visualization of Embeddings
+## **📈 Expected Results (from my crop+ResNet50 algorithm)**
+### **t-SNE Visualization of Embeddings**
 ![t-SNE Plot](Results_image/Result_crop_resnet50_tSNE_2D.png)
 
-### PCA 3D Visualization of Embeddings
+### **PCA 3D Visualization of Embeddings**
 ![PCA 3D Plot](Results_image/Result_crop_resnet50_PCA_3D.png)
 
+---
 
 ## Notes on ROI Align
-While ROI Align was implemented for embedding extraction, the results were not satisfactory. The method is available in the code for reference but is not recommended as the primary approach.
+Although **ROI Align** was implemented as an alternative embedding method, results were not satisfactory. The method is still available in the code for reference but is not recommended as the primary approach.
 
+---
 
-## Contact
-For questions, reach out via GitHub Issues or email at roye.katzav@gmail.com.
+## **📞 Contact**
+For questions, **open an issue** on this repository or email **roye.katzav@gmail.com**.
+
 

@@ -96,10 +96,6 @@ Below are example outputs of the object embedding process:
 ![PCA 3D Plot](Results_image/Result_crop_resnet50_PCA_3D.png)
 
 
-## **Notes on RoIAlign**
-- RoIAlign was implemented as an alternative embedding method but was found to be suboptimal for high-quality embeddings. The cropping method with **ResNet50** provides the best results.
-
-
 ## Notes on ROI Align
 While ROI Align was implemented for embedding extraction, the results were not satisfactory. The method is available in the code for reference but is not recommended as the primary approach.
 

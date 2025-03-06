@@ -9,6 +9,7 @@ This project implements an **Object Embedding System** that detects objects in a
 
 ## **Features**
 - **Object Detection**: Uses **YOLOv12x** to detect objects in an image.
+  * YOLOv12x used for minimal false positives - it can be replaced with other YOLO models.
 - **Object Embedding Extraction**:
   - **Cropping with ResNet50 (Main Algorithm)** – Extracts high-quality embeddings.
   - **CLIP Encoder (Alternative Option)** – Can be used instead of ResNet50 for embeddings.
@@ -60,7 +61,7 @@ pip install -r requirements.txt
 ```python
 from object_embedder import ObjectEmbedder
 
-detector = "yolo12x"
+detector = "yolo12x" # Can be replaced with other YOLO models
 embed_method = "crop"  # Can be "roi_align" (not recommended)
 crop_backbone = "resnet50"  # Can be "clip" as an alternative
 conf_threshold = 0.6  # Confidence threshold for detection

@@ -73,7 +73,7 @@ In addition, the ObjectEmbedding.ipynb file contains the class and evaluation ex
   - **t-SNE 2D plot**: Clusters similar objects (e.g., all dogs together, all cats together).
   - **PCA 3D plot**: Provides another view of class separation in a reduced space.
 
-## Example log output (from my crop+ResNet50 algorithm):
+## Example log output (from my crop+ResNet50 algorithm)
 ```
 detector: yolo12x
 Embedding Method: crop
@@ -85,7 +85,7 @@ Processed 35 images.
  Average processing time per image: 114.92 ms
 ```
 
-## Expected Results
+## Expected Results (from my crop+ResNet50 algorithm)
 
 Below are example outputs of the object embedding process:
 

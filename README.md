@@ -50,6 +50,23 @@ pip install -r requirements.txt
 
 ---
 
+## **🔍 Object Embedding Methods Used**
+The project explores multiple approaches for extracting embeddings from detected objects:
+
+### **📌 1. Cropping + ResNet50 (Main Algorithm)** 
+- **Approach:** After detecting objects using YOLO, the detected bounding boxes are used to crop objects from the original image. The cropped images are then passed through a **ResNet50** backbone to extract feature embeddings.
+- **Why?** This method provides high-quality embeddings, as the cropped objects maintain spatial integrity and pass through a **well-trained CNN classifier**.
+
+### **📌 2. Cropping + CLIP Encoder (Alternative Approach)** 
+- **Approach:** Similar to the ResNet50 approach, but instead of using ResNet50, the **CLIP ViT-B/32** Encoder is used for extracting embeddings.
+- **Why?** **CLIP** provides embeddings that are aligned with **both images and text**, which could lead to a better embeddings.
+
+### **📌 3. ROI Align + ResNet50 (Tested but Not Effective)** 
+- **Approach:** Instead of cropping objects, **ROI Align** extracts region-wise feature maps (of the objects) directly from the feature map of image which is genereted by **ResNet50**’ backbone.
+- **Why?** Theoretically, this method retains **contextual information** from the entire image rather than isolated objects and could be more efficient then croping objects.
+
+---
+
 ### **🔍 Evaluation Metrics**
 - **t-SNE (2D)** is used to evaluate local structure and how well embeddings of similar objects cluster.
 - **PCA (3D)** is used to analyze global structure and class separability.
@@ -112,6 +129,7 @@ Average processing time per image: 114.92 ms
 Although **ROI Align** was implemented as an alternative embedding method, results were not satisfactory. The method is still available in the code for reference but is not recommended as the primary approach.
 
 ---
+
 
 ## **📞 Contact**
 For questions, **open an issue** on this repository or email **roye.katzav@gmail.com**.

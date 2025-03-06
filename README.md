@@ -66,6 +66,51 @@ In addition, the ObjectEmbedding.ipynb file contains the class and evaluation ex
 - **t-SNE (2D)** is used to evaluate local structure and how well embeddings of similar objects cluster.
 - **PCA (3D)** is used to analyze global structure and class separability.
 
+## **Expected Output**
+- **Bounding boxes**: The model detects objects and returns bounding boxes with confidence scores.
+- **Feature embeddings**: A numerical vector representing each detected object.
+- **Visualization**:
+  - **t-SNE 2D plot**: Clusters similar objects (e.g., all dogs together, all cats together).
+  - **PCA 3D plot**: Provides another view of class separation in a reduced space.
+
+## Example log output (from my crop+ResNet50 algorithm):
+```
+detector: yolo12x
+Embedding Method: crop
+Crop Backbone: resnet50
+ Confidence Threshold: 0.6
+YOLOv12x summary (fused): 283 layers, 59,135,744 parameters, 0 gradients, 199.0 GFLOPs
+Processed 138 embeddings after filtering.
+Processed 35 images.
+ Average processing time per image: 114.92 ms
+```
+
+## Expected Results
+
+Below are example outputs of the object embedding process:
+
+### t-SNE Visualization of Embeddings
+![t-SNE Plot](Results_image/Result_crop_resnet50_tSNE_2D.png)
+
+### PCA 3D Visualization of Embeddings
+![PCA 3D Plot](Results_image/Result_crop_resnet50_PCA_3D.png)
+
+
+## **Notes on RoIAlign**
+- RoIAlign was implemented as an alternative embedding method but was found to be suboptimal for high-quality embeddings. The cropping method with **ResNet50** provides the best results.
+
+## **Acknowledgments**
+- **YOLOv12x** for object detection
+- **ResNet50 / CLIP** for feature extraction
+- **t-SNE & PCA** for visualization
+
+## **License**
+This project is released under the MIT License.
+
+---
+
+**Author:** Your Name
+
 ## Notes on ROI Align
 While ROI Align was implemented for embedding extraction, the results were not satisfactory. The method is available in the code for reference but is not recommended as the primary approach.
 

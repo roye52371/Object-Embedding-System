@@ -99,20 +99,10 @@ Below are example outputs of the object embedding process:
 ## **Notes on RoIAlign**
 - RoIAlign was implemented as an alternative embedding method but was found to be suboptimal for high-quality embeddings. The cropping method with **ResNet50** provides the best results.
 
-## **Acknowledgments**
-- **YOLOv12x** for object detection
-- **ResNet50 / CLIP** for feature extraction
-- **t-SNE & PCA** for visualization
-
-## **License**
-This project is released under the MIT License.
-
----
-
-**Author:** Your Name
 
 ## Notes on ROI Align
 While ROI Align was implemented for embedding extraction, the results were not satisfactory. The method is available in the code for reference but is not recommended as the primary approach.
+
 
 ## Contact
 For questions, reach out via GitHub Issues or email at roye.katzav@gmail.com.

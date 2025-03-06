@@ -33,6 +33,7 @@ This project implements an **Object Embedding System** that detects objects in a
 
 ## **🚀 Installation & Setup**
 The project was tested on **Google Colab with a T4 GPU** but should work on **any CUDA-compatible GPU**.
+Make sure you have Python 3.11.11+ installed.
 
 ### **1️⃣ Clone the Repository**
 ```bash

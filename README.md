@@ -26,7 +26,9 @@ This project implements an object embedding system that detects objects in an im
 ## Setup Instructions
 
 ### Requirements
-The project was tested on Google Colab using a **T4 GPU**. It should work on any system with a CUDA-compatible GPU.
+The project was tested on Google Colab using a **T4 GPU**.
+It should work on any system with a CUDA-compatible GPU.
+Make sure you have Python 3.11.11+ installed.
 
 ### Installation
 1. Clone the repository:
